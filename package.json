@@ -1,0 +1,31 @@
+{
+  "name": "worker-tick",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "import": "./dist/worker-tick.es.js",
+      "default": "./dist/worker-tick.umd.js"
+    }
+  },
+  "main": "dist/worker-tick.umd.js",
+  "module": "dist/worker-tick.es.js",
+  "unpkg": "dist/worker-tick.iife.js",
+  "jsdelivr": "dist/worker-tick.iife.js",
+  "files": ["dist"],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.15.0",
+    "@types/node": "^20.12.7",
+    "eslint": "^8.57.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vite-plugin-dts": "^3.9.0"
+  }
+}
