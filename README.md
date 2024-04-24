@@ -30,10 +30,8 @@ import workerTick from 'worker-tick'
 // => Printouts per second: 1 2 3
 
 // clear
-const intervalInfo = workerTick.setInterval(console.log, 1000, 1, 2, 3)
-function clear() {
-  intervalInfo.clear()
-}
+const timerId = workerTick.setInterval(console.log, 1000, 1, 2, 3)
+workerTick.clearInterval(timerId)
 
 // setTimeout() Same as above
 ```

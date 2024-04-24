@@ -6,14 +6,16 @@ export function workerCode() {
 
     const timerFunctions = {
       setTimeout() {
-        const id = setTimeout(() => {
-          self.postMessage({ id, finishId: uuid })
+        const timerId = setTimeout(() => {
+          self.postMessage({ uuid, finish: true })
         }, timeout)
+        self.postMessage({ id: timerId, uuid })
       },
       setInterval() {
-        const id = setInterval(() => {
-          self.postMessage({ id, finishId: uuid })
+        const timerId = setInterval(() => {
+          self.postMessage({ uuid, finish: true })
         }, timeout, ...args)
+        self.postMessage({ id: timerId, uuid })
       },
       clearInterval() {
         clearInterval(id)
