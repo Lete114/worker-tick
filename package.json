@@ -13,6 +13,7 @@
   "module": "dist/worker-tick.es.js",
   "unpkg": "dist/worker-tick.iife.js",
   "jsdelivr": "dist/worker-tick.iife.js",
+  "types": "dist/worker-tick.es.d.ts",
   "files": ["dist"],
   "scripts": {
     "dev": "vite",
