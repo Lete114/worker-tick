@@ -1,7 +1,7 @@
 {
   "name": "worker-tick",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "license": "MIT",
   "exports": {
     ".": {
@@ -18,7 +18,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepublishOnly": "pnpm build"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.15.0",

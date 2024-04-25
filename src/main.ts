@@ -1,10 +1,13 @@
 import { workerCode } from './worker'
 import { getUUID } from './utils'
 
-const SETTIMEOUT = 'setTimeout'
-const CLEARTIMEOUT = 'clearTimeout'
-const SETINTERVAL = 'setInterval'
-const CLEARINTERVAL = 'clearInterval'
+const SETTIMEOUT = 'setTimeout' as const
+const CLEARTIMEOUT = 'clearTimeout' as const
+const SETINTERVAL = 'setInterval' as const
+const CLEARINTERVAL = 'clearInterval' as const
+
+type TTimer = typeof SETTIMEOUT | typeof SETINTERVAL
+type TClearTimer = typeof CLEARTIMEOUT | typeof CLEARINTERVAL
 
 const code = `(${workerCode})()`
 const blob = new Blob([code], { type: 'application/javascript' })
@@ -28,7 +31,7 @@ worker.addEventListener('message', (event: MessageEvent<{ id: number, uuid: stri
   }
 })
 
-function setTimer(action: TWorkerTick['action'], handler: Function, timeout?: number, ...args: any[]) {
+function setTimer(action: TTimer, handler: Function, timeout?: number, ...args: any[]) {
   const uuid = getUUID().replace(/-/g, '')
   map.set(uuid, { handler, args })
   const params: TWorkerTick = {
@@ -42,9 +45,9 @@ function setTimer(action: TWorkerTick['action'], handler: Function, timeout?: nu
   return uuid
 }
 
-function clear(uuid: string, action: string) {
+function clear(uuid: string, action: TClearTimer) {
   const { id } = map.get(uuid)!
-  worker.postMessage({ id, action: action === SETTIMEOUT ? CLEARTIMEOUT : CLEARINTERVAL })
+  worker.postMessage({ id, action: action === CLEARTIMEOUT ? CLEARTIMEOUT : CLEARINTERVAL })
   map.delete(uuid)
 }
 
